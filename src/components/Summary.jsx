@@ -1,8 +1,8 @@
 import quizCompleteImg  from '../assets/quiz-complete.png';
+import QUESTIONS from '../questions.js';
 
 
-
-export default function Summary(){
+export default function Summary({userAnswers}){
     return(
         <div id ="summary">
             <img src={quizCompleteImg} alt="Trophy Icon" />
@@ -23,11 +23,29 @@ export default function Summary(){
             </p>
         </div>
         <ol>
-            <li>
-                <h3>2</h3>
-                <p className = "question"> Question Text</p>
-                <p className='user-answer'>User's Answer</p>
+            {userAnswers.map( (answer, index) => {
+
+                let cssClass = "user-answer";
+
+                if (answer === null){
+                    cssClass += ' skipped';
+                }
+                else if(answer === QUESTIONS[index].answers[0]){
+                    cssClass += ' correct';
+                } 
+                else {
+                    cssClass += ' wrong';
+                }
+
+                return(
+                <li key={answer}>
+                <h3>{index + 1}</h3>
+                <p className = "question"> {QUESTIONS[index].text}</p>
+                <p className='user-answer'>{answer ?? 'Skipped'}</p>
             </li>
+            )
+            })}
+            
         </ol>
         </div>
     )
