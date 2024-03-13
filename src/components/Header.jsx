@@ -4,7 +4,7 @@ export default function Header(){
     return(
         <header>
             <img src={logoImg} alt= "Quiz  Logo" />
-            <h1>Quiz Countdown</h1>
+            <h1>Question Countdown</h1>
         </header>
     )
 }
